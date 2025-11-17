@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activities - NOTIVA</title>
+<link rel="stylesheet" href="../css/my-app.css">
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+    <span>📅 Activities</span>
+</div>
+
+<!-- Mini Calendar Container -->
+<div class="mini-calendar" id="miniCalendar"></div>
+
+<!-- Section Title -->
+<h3 class="section-title">Daftar Aktivitas</h3>
+<ul id="activityList" class="activity-list"></ul>
+
+<!-- Navbar -->
+<div class="navbar">
+    <a href="dashboard.html" class="nav-item">🏠<span>Home</span></a>
+    <a href="activities.html" class="nav-item active">📅<span>Activities</span></a>
+    <a href="statistics.html" class="nav-item">📊<span>Statistics</span></a>
+    <a href="profile.html" class="nav-item">👤<span>Profile</span></a>
+</div>
+
+<script src="../js/my-app.js"></script>
+<script>
+renderMiniCalendar();
+loadActivities(); // load all
+</script>
+</body>
+</html>

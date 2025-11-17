@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistics - NOTIVA</title>
+<link rel="stylesheet" href="../css/my-app.css">
+
+<!-- ChartJS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="topbar">
+    <span>📊 Statistik Aktivitas</span>
+</div>
+
+<div class="stats-container">
+
+    <!-- Progress Circle -->
+    <div class="progress-card">
+        <h3>Weekly Goal</h3>
+        <div class="progress-circle">
+            <span id="progressPercent">0%</span>
+        </div>
+        <p id="progressStatus">0 / 7 Completed</p>
+    </div>
+
+    <!-- Chart -->
+    <div class="chart-card">
+        <h3>Aktivitas Berdasarkan Prioritas</h3>
+        <canvas id="priorityChart"></canvas>
+    </div>
+</div>
+
+<!-- Navbar -->
+<div class="navbar">
+    <a href="../dashboard.html" class="nav-item">🏠<span>Home</span></a>
+    <a href="activities.html" class="nav-item">📅<span>Activities</span></a>
+    <a href="statistics.html" class="nav-item active">📊<span>Statistics</span></a>
+    <a href="profile.html" class="nav-item">👤<span>Profile</span></a>
+</div>
+
+<script src="../js/my-app.js"></script>
+<script>
+loadStatisticsData();
+</script>
+</body>
+</html>
