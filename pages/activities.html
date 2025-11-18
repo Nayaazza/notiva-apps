@@ -5,6 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Activities - NOTIVA</title>
 <link rel="stylesheet" href="../css/my-app.css">
+
+<style>
+.day {
+    cursor: pointer;
+    padding: 5px 8px;
+    border-radius: 5px;
+}
+.day.selected {
+    background: #2364d2;
+    color: #fff;
+}
+.activity-item {
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.priority-low { background: #4CAF50; }
+.priority-medium { background: #FFC300; color: #000 !important; }
+.priority-high { background: #E53935; }
+button {
+    border: none;
+    padding: 5px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.done-item {
+    background: #dadada;
+    margin-bottom: 7px;
+    padding: 8px;
+    border-radius: 6px;
+}
+</style>
 </head>
 <body>
 
@@ -17,21 +53,149 @@
 <div class="mini-calendar" id="miniCalendar"></div>
 
 <!-- Section Title -->
-<h3 class="section-title">Daftar Aktivitas</h3>
+<h3 class="section-title">📋 Daftar Aktivitas</h3>
 <ul id="activityList" class="activity-list"></ul>
+
+<!-- TASK LIST -->
+<h3 style="margin-bottom:5px;">✔️ Riwayat Selesai</h3>
+<div id="taskList"></div>
 
 <!-- Navbar -->
 <div class="navbar">
-    <a href="dashboard.html" class="nav-item">🏠<span>Home</span></a>
-    <a href="activities.html" class="nav-item active">📅<span>Activities</span></a>
-    <a href="statistics.html" class="nav-item">📊<span>Statistics</span></a>
-    <a href="profile.html" class="nav-item">👤<span>Profile</span></a>
+    <a href="dashboard.html" class="nav-item">🏠<span>Beranda</span></a>
+    <a href="activities.html" class="nav-item active">📅<span>Aktivitas</span></a>
+    <a href="statistics.html" class="nav-item">📊<span>Statistik</span></a>
+    <a href="profile.html" class="nav-item">👤<span>Profil Saya</span></a>
 </div>
 
-<script src="../js/my-app.js"></script>
 <script>
+// RENDER KALENDER
+let selectedDate = null;
+
+function renderMiniCalendar() {
+    const cal = document.getElementById("miniCalendar");
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = d.getMonth();
+    const first = new Date(y, m, 1).getDay();
+    const total = new Date(y, m + 1, 0).getDate();
+
+    cal.innerHTML = '';
+
+    for (let i = 0; i < first; i++) cal.innerHTML += "<span></span>";
+
+    for (let i = 1; i <= total; i++) {
+        const dateStr = `${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+        const span = document.createElement("span");
+        span.innerText = i;
+        span.classList.add("day");
+
+        span.onclick = () => {
+            document.querySelectorAll(".day").forEach(el => el.classList.remove("selected"));
+            span.classList.add("selected");
+            selectedDate = dateStr;
+            loadActivities();
+        };
+
+        cal.appendChild(span);
+    }
+}
+
+// LOAD AKTIVITAS
+function loadActivities() {
+    const data = JSON.parse(localStorage.getItem("tasks") || "[]");
+    const list = document.getElementById("activityList");
+    const history = document.getElementById("taskList");
+
+    list.innerHTML = "";
+    history.innerHTML = "";
+
+    const filtered = selectedDate ? data.filter(t => t.date === selectedDate && !t.done)
+                                  : data.filter(t => !t.done);
+
+    if (filtered.length === 0) {
+        list.innerHTML = "<li>Tidak ada aktivitas.</li>";
+    }
+
+    filtered.forEach(item => {
+        const li = document.createElement("li");
+        li.classList.add("activity-item", `priority-${item.priority}`);
+        li.innerHTML = `<span><b>${item.name}</b><br><small>${item.date}</small></span>`;
+
+        // button selesai
+        const btnFinish = document.createElement("button");
+        btnFinish.innerText = "✔";
+        btnFinish.onclick = () => finishTask(item.id);
+
+        // button hapus
+        const btnDelete = document.createElement("button");
+        btnDelete.innerText = "🗑";
+        btnDelete.onclick = () => deleteTask(item.id);
+
+        const btnGroup = document.createElement("div");
+        btnGroup.appendChild(btnFinish);
+        btnGroup.appendChild(btnDelete);
+
+        li.appendChild(btnGroup);
+        list.appendChild(li);
+    });
+
+    // LOAD HISTORY
+    const doneData = data.filter(t => t.done);
+    doneData.forEach(item => {
+        const div = document.createElement("div");
+        div.classList.add("done-item");
+        div.innerHTML = `${item.name} <small>(${item.date})</small>`;
+        history.appendChild(div);
+    });
+}
+
+// MARK AS DONE
+function finishTask(id) {
+    const data = JSON.parse(localStorage.getItem("tasks") || "[]");
+    const updated = data.map(t => t.id === id ? {...t, done: true} : t);
+    localStorage.setItem("tasks", JSON.stringify(updated));
+    loadActivities();
+}
+
+// DELETE TASK
+function deleteTask(id) {
+    const data = JSON.parse(localStorage.getItem("tasks") || "[]");
+    const filtered = data.filter(t => t.id !== id);
+    localStorage.setItem("tasks", JSON.stringify(filtered));
+    loadActivities();
+}
+
+// INIT
 renderMiniCalendar();
-loadActivities(); // load all
+loadActivities();
 </script>
+
+<div id="toast" class="toast"></div>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+    const msg = localStorage.getItem("toastMsg");
+    if (msg) {
+        showToast(msg);
+        localStorage.removeItem("toastMsg");
+    }
+});
+</script>
+
+<script>
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1200);
+}
+</script>
+
+
 </body>
 </html>
+

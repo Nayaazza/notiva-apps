@@ -6,55 +6,68 @@
     <title>Dashboard - NOTIVA</title>
     <link rel="stylesheet" href="../css/my-app.css" />
 </head>
-<body>
+<body class="dashboard-bg">
 
 <!-- TOPBAR -->
-<header class="topbar">
-    <h2>📘 NOTIVA</h2>
-    <p id="username" class="user-greeting"></p>
-    <button class="logout-btn" onclick="logout()">Logout</button>
+<header class="topbar enhanced-topbar">
+    <div class="topbar-left">
+        <h2>📘 NOTIVA</h2>
+    </div>
+
+    <div class="topbar-center">
+        <p id="username" class="user-greeting"></p>
+    </div>
+
+    <button class="logout-btn enhanced-logout" onclick="logout()">Logout</button>
 </header>
 
 <div class="container">
 
-    <!-- ADD TASK CARD -->
-    <div class="card">
-        <h3>Tambah Aktivitas</h3>
+    <!-- GREETING -->
+    <h2 class="welcome-title">
+        👋 Selamat Datang!
+    </h2>
+
+    <h3 class="center-text">Progress Hari Ini</h3>
+    <p class="quote-text center-text">
+        🌟 "Setiap hari adalah kesempatan baru untuk berkembang."
+    </p>
+
+
+    <!-- CARD TAMBAH AKTIVITAS -->
+    <div class="card enhanced-card">
+        <h3 class="card-title">➕ Tambah Aktivitas</h3>
 
         <div class="task-input-field">
             <input id="taskInput" type="text" placeholder="Contoh: Belajar Pemrograman">
             <select id="priority">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
+                <option value="low">Tidak Mendesak</option>
+                <option value="medium">Cukup Mendesak</option>
+                <option value="high">Sangat Mendesak</option>
             </select>
         </div>
 
         <div class="task-input-field" style="margin-top:10px">
             <input id="taskDate" type="date">
-            <label style="display:flex;align-items:center;gap:5px;color:#555;">
-                <input id="taskReminder" type="checkbox"> Remind Me
+            <label class="reminder-label">
+                <input id="taskReminder" type="checkbox"> Ingatkan Saya
             </label>
         </div>
 
-        <button class="add-btn" onclick="addTask()" style="margin-top:10px;">SIMPAN</button>
+        <button class="add-btn enhanced-btn" onclick="saveAndGoActivities()">SIMPAN</button>
     </div>
-
-    <!-- TASK LIST -->
-    <h3 style="margin-bottom:5px;">📋 Daftar Aktivitas</h3>
-    <div id="taskList"></div>
 
 </div>
 
 <!-- NAVBAR -->
-<nav class="navbar">
+<nav class="navbar enhanced-navbar">
     <a href="dashboard.html" class="nav-item active">
         <span>🏠</span>
-        <p>Home</p>
+        <p>Beranda</p>
     </a>
     <a href="activities.html" class="nav-item">
         <span>📝</span>
-        <p>Activities</p>
+        <p>Aktivitas</p>
     </a>
     <a href="statistics.html" class="nav-item">
         <span>📊</span>
@@ -62,10 +75,39 @@
     </a>
     <a href="profile.html" class="nav-item">
         <span>👤</span>
-        <p>Profil</p>
+        <p>Profil Saya</p>
     </a>
 </nav>
 
 <script src="../js/my-app.js"></script>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<script>
+function saveAndGoActivities() {
+    let name = document.getElementById("taskInput").value.trim();
+
+    if (!name) {
+        showToast("Nama aktivitas belum diisi!");
+        return;
+    }
+
+    addTask();
+    showToast("Aktivitas berhasil disimpan!");
+
+    setTimeout(() => {
+        window.location.href = "activities.html";
+    }, 1200);
+}
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 1200);
+}
+</script>
+
 </body>
 </html>

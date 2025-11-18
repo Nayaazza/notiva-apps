@@ -14,10 +14,28 @@ function addTask() {
     tasks.push({ name, priority, date, remind });
     saveData();
     renderTasks();
+
+    // Simpan pesan agar muncul di halaman activities
+    localStorage.setItem("toastMsg", "Aktivitas berhasil disimpan!");
+
     document.getElementById("taskInput").value = "";
     document.getElementById("taskDate").value = "";
 
     if (remind && date) scheduleReminder(name, date);
+}
+
+function saveAndGoActivities() {
+    let name = document.getElementById("taskInput").value.trim();
+
+    if (!name) {
+        showToast("Nama aktivitas belum diisi!");
+        return;
+    }
+
+    addTask();
+
+    // Setelah data tersimpan → pindah halaman
+    window.location.href = "activities.html";
 }
 
 // Render UI
@@ -259,3 +277,4 @@ function saveProfile(){
     closeEditProfile();
     loadProfile();
 }
+

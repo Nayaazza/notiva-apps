@@ -1,3 +1,6 @@
+/* ======================================================
+   GLOBAL STYLE & VARIABLES
+====================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 * {
@@ -11,12 +14,28 @@
     --primary: #2364d2;
     --bg: #eef2ff;
     --card: #ffffff;
+
     --dark-bg: #0c0f14;
     --dark-card: #161a22;
     --dark-text: #eaf0ff;
+
+    --danger: #ff4757;
+    --success: #2ecc71;
+    --warning: #fd7e14;
 }
 
-/* Splash Screen */
+/* ======================================================
+   BODY / GENERAL
+====================================================== */
+body {
+    background: var(--bg);
+    padding: 20px;
+    color: #333;
+}
+
+/* ======================================================
+   SPLASH SCREEN
+====================================================== */
 .splash-body {
     background: linear-gradient(135deg, #2364d2, #5ea6ff);
     color: #fff;
@@ -46,15 +65,17 @@
     animation: spin 0.7s linear infinite;
 }
 
-@keyframes spin {
-    100% { transform: rotate(360deg); }
-}
+@keyframes spin { 100% { transform: rotate(360deg); } }
 
-/* Dashboard */
-body {
-    background: var(--bg);
-    padding: 20px;
-    color: #333;
+/* ======================================================
+   DASHBOARD CARDS & INPUTS
+====================================================== */
+.card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 15px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.06);
 }
 
 .dashboard-header {
@@ -66,20 +87,12 @@ body {
     align-items: center;
 }
 
-.card {
-    background: var(--card);
-    border-radius: 18px;
-    padding: 18px;
-    margin-bottom: 15px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.06);
-}
-
 .task-input-field {
     display: flex;
     gap: 10px;
 }
 
-input, select {
+input, select, textarea {
     width: 100%;
     padding: 11px;
     border-radius: 12px;
@@ -87,6 +100,7 @@ input, select {
     background: #f1f1f1;
 }
 
+/* Buttons */
 .add-btn {
     background: var(--primary);
     border: none;
@@ -97,6 +111,9 @@ input, select {
     cursor: pointer;
 }
 
+/* ======================================================
+   TASK LIST
+====================================================== */
 .task-item {
     background: #f8f8f8;
     padding: 10px 14px;
@@ -112,14 +129,16 @@ input, select {
 .priority-low { color: #2ecc71; font-weight: 600; }
 
 .delete-btn {
-    background: transparent;
+    background: none;
     border: none;
     color: red;
     font-size: 18px;
     cursor: pointer;
 }
 
-/* Dark mode */
+/* ======================================================
+   DARK MODE
+====================================================== */
 .dark {
     background: var(--dark-bg);
     color: var(--dark-text);
@@ -127,22 +146,22 @@ input, select {
 
 .dark .card {
     background: var(--dark-card);
-    color: var(--dark-text);
 }
 
-.dark input, .dark select {
+.dark input, .dark select, .dark textarea {
     background: #20242e;
     color: #fff;
 }
 
-/* AUTH (Login/Register) */
+/* ======================================================
+   AUTH PAGES
+====================================================== */
 .auth-body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background: linear-gradient(120deg, #6a11cb, #2575fc);
-    font-family: "Poppins", sans-serif;
 }
 
 .auth-card {
@@ -180,9 +199,9 @@ input, select {
     background: #2575fc;
     color: white;
     border: none;
-    cursor: pointer;
     border-radius: 8px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .auth-btn:hover {
@@ -197,7 +216,9 @@ input, select {
     font-weight: bold;
 }
 
-/* ===== TOPBAR ===== */
+/* ======================================================
+   TOPBAR
+====================================================== */
 .topbar {
   background: #2575fc;
   color: white;
@@ -209,7 +230,6 @@ input, select {
 }
 
 .user-greeting {
-  margin: 0;
   font-size: 14px;
   opacity: .9;
 }
@@ -218,8 +238,7 @@ input, select {
   position: absolute;
   right: 15px;
   top: 15px;
-  background: #ff4757;
-  border: none;
+  background: var(--danger);
   color: white;
   font-size: 13px;
   padding: 6px 12px;
@@ -227,12 +246,9 @@ input, select {
   cursor: pointer;
 }
 
-/* Main container */
-.container {
-  margin-bottom: 80px; /* spacing before navbar */
-}
-
-/* ===== NAVBAR ===== */
+/* ======================================================
+   NAVBAR BOTTOM
+====================================================== */
 .navbar {
   position: fixed;
   bottom: 0;
@@ -247,15 +263,14 @@ input, select {
 }
 
 .nav-item {
-  text-align: center;
   flex: 1;
+  text-align: center;
   color: #666;
   text-decoration: none;
   font-size: 13px;
 }
 
 .nav-item span {
-  display: block;
   font-size: 20px;
 }
 
@@ -264,163 +279,174 @@ input, select {
   font-weight: bold;
 }
 
+/* ======================================================
+   MINI CALENDAR
+====================================================== */
 .mini-calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  background: var(--card);
-  padding: 12px;
-  margin: 10px;
-  border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    background: var(--card);
+    padding: 12px;
+    margin: 10px;
+    border-radius: 10px;
 }
 
 .mini-day {
-  text-align: center;
-  padding: 8px 0;
-  font-size: 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  background: var(--light);
-  position: relative;
-  transition: 0.2s;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 .mini-day.today {
-  background: var(--primary);
-  color: #fff;
-  font-weight: bold;
+    background: var(--primary);
+    color: #fff;
+    font-weight: bold;
 }
 
 .mini-day:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .mini-day.active {
-  border: 2px solid var(--primary);
+    border: 2px solid var(--primary);
 }
 
 .day-badge {
-  position: absolute;
-  bottom: 3px;
-  right: 4px;
-  background: var(--danger);
-  color: #fff;
-  padding: 1px 4px;
-  font-size: 10px;
-  border-radius: 6px;
+    position: absolute;
+    bottom: 3px;
+    right: 4px;
+    background: var(--danger);
+    color: #fff;
+    padding: 1px 4px;
+    font-size: 10px;
+    border-radius: 6px;
 }
 
+/* ======================================================
+   STATISTICS PAGE
+====================================================== */
 .stats-container {
-  padding: 15px;
+    padding: 15px;
 }
 
 .progress-card, .chart-card {
-  background: var(--card);
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  text-align: center;
+    background: var(--card);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 .progress-circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 10px auto;
-  border: 8px solid var(--primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  font-weight: bold;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 10px auto;
+    border: 8px solid var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
 }
 
+/* ======================================================
+   PROFILE PAGE
+====================================================== */
 .profile-card {
-  text-align: center;
-  background: var(--card);
-  padding: 25px;
-  border-radius: 15px;
-  margin: 20px;
+    text-align: center;
+    background: var(--card);
+    padding: 25px;
+    border-radius: 15px;
+    margin: 20px;
 }
 
 .profile-photo {
-  width: 85px;
-  height: 85px;
-  border-radius: 50%;
-  border: 3px solid var(--primary);
-  object-fit: cover;
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+    object-fit: cover;
 }
 
 .profile-sub {
-  color: #666;
-  margin: 4px 0;
+    color: #666;
+    margin: 4px 0;
 }
 
 .profile-sub.small {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .edit-btn {
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 10px;
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
 }
 
-/* Modal */
+/* ======================================================
+   MODAL
+====================================================== */
 .modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-content {
-  background: #fff;
-  width: 85%;
-  padding: 20px;
-  border-radius: 12px;
+    background: #fff;
+    width: 85%;
+    padding: 20px;
+    border-radius: 12px;
 }
 
 .modal-content input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
+    margin-bottom: 10px;
 }
 
 .modal-actions {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .save-btn {
-  background: var(--success);
-  color: white;
-  padding: 8px 20px;
-  border-radius: 8px;
-  border: none;
+    background: var(--success);
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: none;
 }
 
 .cancel-btn {
-  background: #aaa;
-  color: white;
-  padding: 8px 20px;
-  border-radius: 8px;
-  border: none;
+    background: #aaa;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: none;
 }
 
-textarea {
-  width: 100%;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  padding: 8px;
-  margin-bottom: 10px;
+/* Center Welcome Text */
+.welcome-title,
+.welcome-text,
+.dashboard-welcome {
+    text-align: center !important;
+}
+
+.quote-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    font-style: italic;
 }
 
