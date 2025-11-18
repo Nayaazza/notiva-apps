@@ -280,3 +280,4 @@ function openEditProfile() {
 function closeEditProfile() {
   document.getElementById("editModal").style.display = "none";
 }
+

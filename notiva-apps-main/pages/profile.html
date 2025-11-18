@@ -1,81 +1,91 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profile - NOTIVA</title>
-<link rel="stylesheet" href="../css/my-app.css">
-</head>
-<body>
-
-<!-- Topbar -->
-<div class="topbar">
-    <span>👤 Profil Pengguna</span>
-</div>
-
-<!-- Profile Card -->
-<div class="profile-card">
-    <img id="profilePic" src="../assets/default-user.png" class="profile-photo">
-
-    <h2 id="profileName">Your Name</h2>
-    <p id="profileUsername" class="profile-sub small">@username</p>
-    <p id="profileBio" class="profile-sub"></p>
-    <p id="profileGender" class="profile-sub small"></p>
-    <p id="profileGoal" class="profile-sub small"></p>
-
-    <button class="edit-btn" onclick="openEditProfile()">Edit Profil</button>
-</div>
-
-<!-- Edit Modal -->
-<div id="editModal" class="modal">
-<div class="modal-content">
-    <h3>Edit Profil</h3>
-
-    <label>Nama Lengkap</label>
-    <input id="inputName" type="text">
-
-    <label>Username</label>
-    <input id="inputUsername" type="text">
-
-    <label>Jenis Kelamin</label>
-    <select id="inputGender">
-        <option value="">Pilih</option>
-        <option value="Laki-laki">Laki-laki</option>
-        <option value="Perempuan">Perempuan</option>
-    </select>
-
-    <label>Bio / Deskripsi Singkat</label>
-    <textarea id="inputBio" rows="2"></textarea>
-
-    <label>Foto Profil</label>
-    <input id="inputPhoto" type="file" accept="image/*" onchange="previewPhoto(event)">
-
-    <label>Pilih Tema</label>
-    <select id="inputTheme">
-        <option value="auto">Auto</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-    </select>
-
-    <label>Goal Produktivitas Harian (tasks)</label>
-    <input id="inputGoal" type="number" min="1">
-
-    <div class="modal-actions">
-        <button onclick="saveProfile()" class="save-btn">Simpan</button>
-        <button onclick="closeEditProfile()" class="cancel-btn">Batal</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - NOTIVA</title>
+    <link rel="stylesheet" href="../css/my-app.css" />
+  </head>
+  <body>
+    <!-- Topbar -->
+    <div class="topbar">
+      <span>👤 Profil Pengguna</span>
     </div>
-</div>
-</div>
 
-<!-- Bottom Navbar -->
-<div class="navbar">
-    <a href="dashboard.html" class="nav-item">🏠<span>Home</span></a>
-    <a href="activities.html" class="nav-item">📅<span>Activities</span></a>
-    <a href="statistics.html" class="nav-item">📊<span>Statistics</span></a>
-    <a href="profile.html" class="nav-item active">👤<span>Profile</span></a>
-</div>
+    <!-- Profile Card -->
+    <div class="profile-card">
+      <img
+        id="profilePic"
+        src="../assets/default-user.png"
+        class="profile-photo"
+      />
 
-<script src="../js/my-app.js"></script>
-<script> loadProfile(); </script>
-</body>
+      <h2 id="profileName">Your Name</h2>
+      <p id="profileUsername" class="profile-sub small">@username</p>
+      <p id="profileBio" class="profile-sub"></p>
+      <p id="profileGender" class="profile-sub small"></p>
+      <p id="profileGoal" class="profile-sub small"></p>
+
+      <button class="edit-btn" onclick="openEditProfile()">Edit Profil</button>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <h3>Edit Profil</h3>
+
+        <label>Nama Lengkap</label>
+        <input id="inputName" type="text" />
+
+        <label>Username</label>
+        <input id="inputUsername" type="text" />
+
+        <label>Jenis Kelamin</label>
+        <select id="inputGender">
+          <option value="">Pilih</option>
+          <option value="Laki-laki">Laki-laki</option>
+          <option value="Perempuan">Perempuan</option>
+        </select>
+
+        <label>Bio / Deskripsi Singkat</label>
+        <textarea id="inputBio" rows="2"></textarea>
+
+        <label>Foto Profil</label>
+        <input
+          id="inputPhoto"
+          type="file"
+          accept="image/*"
+          onchange="previewPhoto(event)"
+        />
+
+        <label>Pilih Tema</label>
+        <select id="inputTheme">
+          <option value="auto">Auto</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+
+        <label>Goal Produktivitas Harian (tasks)</label>
+        <input id="inputGoal" type="number" min="1" />
+
+        <div class="modal-actions">
+          <button onclick="saveProfile()" class="save-btn">Simpan</button>
+          <button onclick="closeEditProfile()" class="cancel-btn">Batal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navbar -->
+    <div class="navbar">
+      <a href="dashboard.html" class="nav-item">🏠<span>Home</span></a>
+      <a href="activities.html" class="nav-item">📅<span>Activities</span></a>
+      <a href="statistics.html" class="nav-item">📊<span>Statistics</span></a>
+      <a href="profile.html" class="nav-item active">👤<span>Profile</span></a>
+    </div>
+
+    <script src="../js/my-app.js"></script>
+    <script>
+      loadProfile();
+    </script>
+  </body>
 </html>
