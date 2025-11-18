@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - NOTIVA</title>
+    <link rel="stylesheet" href="../css/my-app.css" />
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+    <h2>📘 NOTIVA</h2>
+    <p id="username" class="user-greeting"></p>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+
+    <!-- ADD TASK CARD -->
+    <div class="card">
+        <h3>Tambah Aktivitas</h3>
+
+        <div class="task-input-field">
+            <input id="taskInput" type="text" placeholder="Contoh: Belajar Pemrograman">
+            <select id="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </div>
+
+        <div class="task-input-field" style="margin-top:10px">
+            <input id="taskDate" type="date">
+            <label style="display:flex;align-items:center;gap:5px;color:#555;">
+                <input id="taskReminder" type="checkbox"> Remind Me
+            </label>
+        </div>
+
+        <button class="add-btn" onclick="addTask()" style="margin-top:10px;">SIMPAN</button>
+    </div>
+
+    <!-- TASK LIST -->
+    <h3 style="margin-bottom:5px;">📋 Daftar Aktivitas</h3>
+    <div id="taskList"></div>
+
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="dashboard.html" class="nav-item active">
+        <span>🏠</span>
+        <p>Home</p>
+    </a>
+    <a href="activities.html" class="nav-item">
+        <span>📝</span>
+        <p>Activities</p>
+    </a>
+    <a href="statistics.html" class="nav-item">
+        <span>📊</span>
+        <p>Statistik</p>
+    </a>
+    <a href="profile.html" class="nav-item">
+        <span>👤</span>
+        <p>Profil</p>
+    </a>
+</nav>
+
+<script src="../js/my-app.js"></script>
+</body>
+</html>
