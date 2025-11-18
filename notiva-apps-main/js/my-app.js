@@ -281,3 +281,10 @@ function closeEditProfile() {
   document.getElementById("editModal").style.display = "none";
 }
 
+function logout() {
+  // Hapus data login yang disimpan
+  localStorage.removeItem("loggedInUser");
+
+  // Arahkan kembali ke halaman login
+  window.location.href = "../index.html";
+}
